@@ -8,7 +8,7 @@ async function dbConnector(fastify: FastifyInstance) {
   database.exec(`
     CREATE TABLE IF NOT EXISTS widgets (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL,
+      title TEXT NOT NULL,
       description TEXT,
       type TEXT DEFAULT 'text',
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,

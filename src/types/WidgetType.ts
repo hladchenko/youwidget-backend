@@ -2,7 +2,7 @@ import { type Static, Type } from "@sinclair/typebox";
 
 export const Widget = Type.Object({
   id: Type.Optional(Type.String()),
-  name: Type.String(),
+  title: Type.String(),
   description: Type.Optional(Type.String()),
   type: Type.Optional(
     Type.Union([
@@ -16,7 +16,7 @@ export const Widget = Type.Object({
 });
 
 export const CreateWidgetRequest = Type.Object({
-  name: Type.String(),
+  title: Type.String(),
   description: Type.Optional(Type.String()),
   type: Type.Optional(
     Type.Union([
@@ -28,7 +28,7 @@ export const CreateWidgetRequest = Type.Object({
 });
 
 export const UpdateWidgetRequest = Type.Object({
-  name: Type.Optional(Type.String()),
+  title: Type.Optional(Type.String()),
   description: Type.Optional(Type.String()),
 });
 

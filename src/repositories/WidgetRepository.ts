@@ -18,7 +18,7 @@ export class WidgetRepository implements IWidgetRepository {
     return rows.map((row) => {
       const widget: WidgetType = {
         id: row.id.toString(),
-        name: row.name,
+        title: row.title,
         createdAt: row.created_at,
         updatedAt: row.updated_at,
       };
@@ -42,7 +42,7 @@ export class WidgetRepository implements IWidgetRepository {
 
     const widget: WidgetType = {
       id: row.id.toString(),
-      name: row.name,
+      title: row.title,
       createdAt: row.created_at,
       updatedAt: row.updated_at,
     };
@@ -58,12 +58,12 @@ export class WidgetRepository implements IWidgetRepository {
   create(data: CreateWidgetRequestType): WidgetType {
     const now = new Date().toISOString();
     const stmt = this.db.prepare(`
-      INSERT INTO widgets (name, description, type, created_at, updated_at)
+      INSERT INTO widgets (title, description, type, created_at, updated_at)
       VALUES (?, ?, ?, ?, ?)
     `);
 
     const result = stmt.run(
-      data.name,
+      data.title,
       data.description || null,
       data.type || "text",
       now,
@@ -72,7 +72,7 @@ export class WidgetRepository implements IWidgetRepository {
 
     const widget: WidgetType = {
       id: result.lastInsertRowid.toString(),
-      name: data.name,
+      title: data.title,
       createdAt: now,
       updatedAt: now,
     };
@@ -92,21 +92,21 @@ export class WidgetRepository implements IWidgetRepository {
     }
 
     const now = new Date().toISOString();
-    const name = data.name ?? existing.name;
+    const title = data.title ?? existing.title;
     const description =
       data.description !== undefined ? data.description : existing.description;
 
     const stmt = this.db.prepare(`
       UPDATE widgets
-      SET name = ?, description = ?, updated_at = ?
+      SET title = ?, description = ?, updated_at = ?
       WHERE id = ?
     `);
 
-    stmt.run(name, description || null, now, id);
+    stmt.run(title, description || null, now, id);
 
     const result: WidgetType = {
       id,
-      name,
+      title,
       updatedAt: now,
     };
 

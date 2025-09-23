@@ -10,6 +10,7 @@ const getAllWidgets = async (request: FastifyRequest, reply: FastifyReply) => {
     const widgets = WidgetService.getAllWidgets(request.server.db);
     return reply.code(200).send(widgets);
   } catch (error) {
+    request.log.error(error, "Error getting all widgets");
     return reply.code(500).send({
       success: false,
       message: "Internal server error",
@@ -27,6 +28,7 @@ const createWidget = async (
 
     return reply.code(201).send(newWidget);
   } catch (error) {
+    request.log.error(error, "Error creating widget");
     return reply.code(500).send({
       success: false,
       message: "Internal server error",
@@ -60,6 +62,7 @@ const updateWidget = async (
 
     return reply.code(200).send(updatedWidget);
   } catch (error) {
+    request.log.error(error, "Error updating widget");
     return reply.code(500).send({
       success: false,
       message: "Internal server error",
@@ -87,6 +90,7 @@ const deleteWidget = async (
       message: "Widget deleted successfully",
     });
   } catch (error) {
+    request.log.error(error, "Error deleting widget");
     return reply.code(500).send({
       success: false,
       message: "Internal server error",
