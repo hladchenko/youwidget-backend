@@ -1,0 +1,27 @@
+import fastifyPlugin from "fastify-plugin";
+import { DatabaseSync } from "node:sqlite";
+import type { FastifyInstance } from "fastify";
+
+async function dbConnector(fastify: FastifyInstance) {
+  const database = new DatabaseSync("db.sqlite");
+
+  database.exec(`
+    CREATE TABLE IF NOT EXISTS widgets (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      description TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+
+  fastify.decorate("db", database);
+}
+
+declare module "fastify" {
+  interface FastifyInstance {
+    db: DatabaseSync;
+  }
+}
+
+export default fastifyPlugin(dbConnector);

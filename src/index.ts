@@ -1,10 +1,12 @@
 import Fastify from "fastify";
+import dbConnector from "./plugins/dbConnector.js";
 import widgetRoutes from "./routes/widgetRoutes.js";
 
 const fastify = Fastify({
   logger: true,
 });
 
+fastify.register(dbConnector);
 fastify.register(widgetRoutes, { prefix: "/widgets" });
 
 const start = async () => {

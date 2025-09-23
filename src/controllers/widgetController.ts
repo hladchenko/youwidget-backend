@@ -7,7 +7,7 @@ import type {
 
 const getAllWidgets = async (request: FastifyRequest, reply: FastifyReply) => {
   try {
-    const widgets = WidgetService.getAllWidgets();
+    const widgets = WidgetService.getAllWidgets(request.server.db);
     return reply.code(200).send({
       success: true,
       data: widgets,
@@ -26,7 +26,7 @@ const getWidgetById = async (
 ) => {
   try {
     const { id } = request.params;
-    const widget = WidgetService.getWidgetById(id);
+    const widget = WidgetService.getWidgetById(request.server.db, id);
 
     if (!widget) {
       return reply.code(404).send({
@@ -53,7 +53,7 @@ const createWidget = async (
 ) => {
   try {
     const widgetData = request.body;
-    const newWidget = WidgetService.createWidget(widgetData);
+    const newWidget = WidgetService.createWidget(request.server.db, widgetData);
 
     return reply.code(201).send({
       success: true,
@@ -79,7 +79,11 @@ const updateWidget = async (
     const { id } = request.params;
     const updateData = request.body;
 
-    const updatedWidget = WidgetService.updateWidget(id, updateData);
+    const updatedWidget = WidgetService.updateWidget(
+      request.server.db,
+      id,
+      updateData,
+    );
 
     if (!updatedWidget) {
       return reply.code(404).send({
@@ -107,7 +111,7 @@ const deleteWidget = async (
 ) => {
   try {
     const { id } = request.params;
-    const deleted = WidgetService.deleteWidget(id);
+    const deleted = WidgetService.deleteWidget(request.server.db, id);
 
     if (!deleted) {
       return reply.code(404).send({
