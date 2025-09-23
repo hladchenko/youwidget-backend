@@ -8,10 +8,7 @@ import type {
 const getAllWidgets = async (request: FastifyRequest, reply: FastifyReply) => {
   try {
     const widgets = WidgetService.getAllWidgets(request.server.db);
-    return reply.code(200).send({
-      success: true,
-      data: widgets,
-    });
+    return reply.code(200).send(widgets);
   } catch (error) {
     return reply.code(500).send({
       success: false,
@@ -28,11 +25,7 @@ const createWidget = async (
     const widgetData = request.body;
     const newWidget = WidgetService.createWidget(request.server.db, widgetData);
 
-    return reply.code(201).send({
-      success: true,
-      data: newWidget,
-      message: "Widget created successfully",
-    });
+    return reply.code(201).send(newWidget);
   } catch (error) {
     return reply.code(500).send({
       success: false,
@@ -65,11 +58,7 @@ const updateWidget = async (
       });
     }
 
-    return reply.code(200).send({
-      success: true,
-      data: updatedWidget,
-      message: "Widget updated successfully",
-    });
+    return reply.code(200).send(updatedWidget);
   } catch (error) {
     return reply.code(500).send({
       success: false,

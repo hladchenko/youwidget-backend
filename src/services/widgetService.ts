@@ -33,9 +33,4 @@ const deleteWidget = (db: DatabaseSync, id: string): boolean => {
   return repository.delete(id);
 };
 
-export {
-  getAllWidgets,
-  createWidget,
-  updateWidget,
-  deleteWidget,
-};
+export { getAllWidgets, createWidget, updateWidget, deleteWidget };
