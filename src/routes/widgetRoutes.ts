@@ -3,7 +3,6 @@ import {
   createWidget,
   deleteWidget,
   getAllWidgets,
-  getWidgetById,
   updateWidget,
 } from "../controllers/widgetController.js";
 import {
@@ -13,22 +12,6 @@ import {
 
 const widgetRoutes = async (fastify: FastifyInstance) => {
   fastify.get("/", getAllWidgets);
-
-  fastify.get(
-    "/:id",
-    {
-      schema: {
-        params: {
-          type: "object",
-          properties: {
-            id: { type: "string" },
-          },
-          required: ["id"],
-        },
-      },
-    },
-    getWidgetById,
-  );
 
   fastify.post(
     "/",

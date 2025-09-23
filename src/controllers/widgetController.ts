@@ -1,4 +1,4 @@
-import type { FastifyRequest, FastifyReply } from "fastify";
+import type { FastifyReply, FastifyRequest } from "fastify";
 import * as WidgetService from "../services/widgetService.js";
 import type {
   CreateWidgetRequestType,
@@ -11,33 +11,6 @@ const getAllWidgets = async (request: FastifyRequest, reply: FastifyReply) => {
     return reply.code(200).send({
       success: true,
       data: widgets,
-    });
-  } catch (error) {
-    return reply.code(500).send({
-      success: false,
-      message: "Internal server error",
-    });
-  }
-};
-
-const getWidgetById = async (
-  request: FastifyRequest<{ Params: { id: string } }>,
-  reply: FastifyReply,
-) => {
-  try {
-    const { id } = request.params;
-    const widget = WidgetService.getWidgetById(request.server.db, id);
-
-    if (!widget) {
-      return reply.code(404).send({
-        success: false,
-        message: "Widget not found",
-      });
-    }
-
-    return reply.code(200).send({
-      success: true,
-      data: widget,
     });
   } catch (error) {
     return reply.code(500).send({
@@ -132,10 +105,4 @@ const deleteWidget = async (
   }
 };
 
-export {
-  getAllWidgets,
-  getWidgetById,
-  createWidget,
-  updateWidget,
-  deleteWidget,
-};
+export { getAllWidgets, createWidget, updateWidget, deleteWidget };

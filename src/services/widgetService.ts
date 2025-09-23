@@ -115,10 +115,4 @@ const deleteWidget = (db: DatabaseSync, id: string): boolean => {
   return result.changes > 0;
 };
 
-export {
-  getAllWidgets,
-  getWidgetById,
-  createWidget,
-  updateWidget,
-  deleteWidget,
-};
+export { getAllWidgets, createWidget, updateWidget, deleteWidget };
