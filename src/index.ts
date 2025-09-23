@@ -6,6 +6,10 @@ const fastify = Fastify({
   logger: true,
 });
 
+fastify.register(import("@fastify/cors"), {
+  origin: true,
+});
+
 fastify.register(dbConnector);
 fastify.register(widgetRoutes, { prefix: "/widgets" });
 
