@@ -1,12 +1,13 @@
 import Fastify from "fastify";
 import dbConnector from "./plugins/dbConnector.js";
 import widgetRoutes from "./routes/widgetRoutes.js";
+import cors from "@fastify/cors";
 
 const fastify = Fastify({
   logger: true,
 });
 
-fastify.register(import("@fastify/cors"), {
+fastify.register(cors, {
   origin: true,
 });
 
