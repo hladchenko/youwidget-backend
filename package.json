@@ -24,6 +24,7 @@
     "@tsconfig/node23": "^23.0.2",
     "@types/node": "^24.5.2",
     "prettier": "3.6.2",
+    "ts-node": "^10.9.2",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2"
   }
