@@ -9,6 +9,7 @@ const fastify = Fastify({
 
 fastify.register(cors, {
   origin: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 });
 
 fastify.register(dbConnector);
