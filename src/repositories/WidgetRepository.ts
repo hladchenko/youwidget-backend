@@ -25,6 +25,9 @@ export class WidgetRepository implements IWidgetRepository {
       if (row.description !== null) {
         widget.description = row.description;
       }
+      if (row.json_data !== null) {
+        widget.json_data = row.json_data;
+      }
       if (row.type !== null) {
         widget.type = row.type;
       }
@@ -49,6 +52,9 @@ export class WidgetRepository implements IWidgetRepository {
     if (row.description !== null) {
       widget.description = row.description;
     }
+    if (row.json_data !== null) {
+      widget.json_data = row.json_data;
+    }
     if (row.type !== null) {
       widget.type = row.type;
     }
@@ -58,13 +64,14 @@ export class WidgetRepository implements IWidgetRepository {
   create(data: CreateWidgetRequestType): WidgetType {
     const now = new Date().toISOString();
     const stmt = this.db.prepare(`
-      INSERT INTO widgets (title, description, type, created_at, updated_at)
-      VALUES (?, ?, ?, ?, ?)
+      INSERT INTO widgets (title, description, json_data, type, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?)
     `);
 
     const result = stmt.run(
       data.title,
       data.description || null,
+      data.json_data || null,
       data.type || "text",
       now,
       now,
@@ -78,6 +85,9 @@ export class WidgetRepository implements IWidgetRepository {
     };
     if (data.description) {
       widget.description = data.description;
+    }
+    if (data.json_data) {
+      widget.json_data = data.json_data;
     }
     if (data.type) {
       widget.type = data.type;

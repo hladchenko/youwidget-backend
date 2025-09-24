@@ -4,6 +4,7 @@ export const Widget = Type.Object({
   id: Type.Optional(Type.String()),
   title: Type.String(),
   description: Type.Optional(Type.String()),
+  json_data: Type.Optional(Type.String()),
   type: Type.Optional(
     Type.Union([
       Type.Literal("line-chart"),
@@ -18,6 +19,7 @@ export const Widget = Type.Object({
 export const CreateWidgetRequest = Type.Object({
   title: Type.String(),
   description: Type.Optional(Type.String()),
+  json_data: Type.Optional(Type.String()),
   type: Type.Optional(
     Type.Union([
       Type.Literal("line-chart"),
